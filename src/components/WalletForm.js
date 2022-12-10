@@ -20,10 +20,10 @@ class WalletForm extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // const { getCurrenciesWallet } = this.props;
-    getCurrenciesWallet();
-  }
+  // componentDidMount() {
+  // const { getCurrenciesWallet } = this.props;
+  // getCurrenciesWallet();
+  // }
 
   inputChange = ({ target }) => {
     this.setState({
@@ -168,7 +168,7 @@ const mapDispatchToProps = (dispatch) => ({
   delAndUpdateExpense: (payload) => dispatch(deleteAndUpdateExpense(payload)),
 });
 
-Wallet.propTypes = {
+WalletForm.propTypes = {
   currencies: PropTypes.shape(),
 }.isRequired;
 
