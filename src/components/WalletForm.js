@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class WalletForm extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class WalletForm extends Component {
   };
 
   render() {
+    const { currencies } = this.props;
     const {
       valueInput,
       descriptionInput,
@@ -95,6 +97,9 @@ class WalletForm extends Component {
     );
   }
 }
+WalletForm.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 const mapStateToProps = (globalState) => ({
   currencies: globalState.wallet.currencies,
