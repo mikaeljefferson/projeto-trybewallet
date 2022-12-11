@@ -11,9 +11,16 @@ class WalletForm extends Component {
       descriptionInput: '',
       methodInput: 'Dinheiro',
       tagInput: 'Alimentação',
-      currencyInput: 'USD',
+      currency: 'USD',
+
     };
   }
+
+  toOptions = (options) => options.map((option) => (
+    <option key={ option } value={ option }>
+      {option}
+    </option>
+  ));
 
   inputChange = ({ target }) => {
     this.setState({
@@ -28,7 +35,7 @@ class WalletForm extends Component {
       descriptionInput,
       methodInput,
       tagInput,
-      currencyInput,
+      currency,
     } = this.state;
     return (
       <div>
@@ -54,19 +61,13 @@ class WalletForm extends Component {
         />
 
         <select
+          name="currency"
+          value={ currency }
           onChange={ this.inputChange }
-          value={ currencyInput }
-          name=" currencyInput"
-          id=" currencyInput"
           data-testid="currency-input"
         >
-          {currencies.map((currencie, index) => (
-            <option value={ currencie.toString() } key={ index }>
-              { currencie }
-            </option>
-          ))}
+          {this.toOptions(currencies)}
         </select>
-
         <select
           onChange={ this.inputChange }
           value={ methodInput }
