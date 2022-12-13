@@ -12,14 +12,14 @@ describe('Testes do arquivo Wallet.js', () => {
     const method = screen.getByTestId('method-input');
     const value = screen.getByTestId('value-input');
     const currency = screen.getByTestId('currency-input');
-    const button = screen.getByTestId('button-add');
+    // const button = screen.getByTestId('button-add');
 
     userEvent.type(description, 'Café');
     userEvent.type(tag, 'Alimentação');
     userEvent.type(method, 'Dinheiro');
     userEvent.type(value, '10');
     userEvent.type(currency, 'USD');
-    userEvent.click(button);
+    // userEvent.click(button);
 
     await waitForElementToBeRemoved(() => screen.getByText(/Nenhuma despesa cadastrada/gi));
 
@@ -28,6 +28,5 @@ describe('Testes do arquivo Wallet.js', () => {
     expect(table).toHaveTextContent('Café');
     expect(table).toHaveTextContent('Alimentação');
     expect(table).toHaveTextContent('Dinheiro');
-    // expect(table).toHaveTextContent('52.36');
   });
 });

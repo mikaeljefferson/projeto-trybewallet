@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import WalletForm from '../components/WalletForm';
 import { renderWithRedux } from './helpers/renderWith';
@@ -7,7 +7,7 @@ import { renderWithRedux } from './helpers/renderWith';
 describe('Testes do componente WalletForm', () => {
   it('', async () => {
     renderWithRedux(<WalletForm />);
-    await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
+    // await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
     const valueInput = screen.getByTestId('value-input');
     const descriptionInput = screen.getByTestId('description-input');
     const currencyInput = screen.getByTestId('currency-input');

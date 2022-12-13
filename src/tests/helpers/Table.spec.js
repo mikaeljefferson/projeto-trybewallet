@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './renderWith';
 import Wallet from '../../pages/Wallet';
@@ -13,14 +13,14 @@ describe('Testes do componente Table', () => {
 
   it('Adicione items a tabela, edite e atualize', async () => {
     renderWithRouterAndRedux(<Wallet />);
-    await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
+    // await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
     const description = screen.getByTestId(desc);
     const tag = screen.getByTestId(tagx);
     const method = screen.getByTestId(methodx);
     const value = screen.getByTestId(valuex);
     const currency = screen.getByTestId(currencyx);
 
-    const button = screen.getByTestId('button-add');
+    // const button = screen.getByTestId('button-add');
     const descriptionValue = 'Teste';
     const tagValue = 'Alimentação';
     const methodValue = 'Dinheiro';
@@ -33,7 +33,7 @@ describe('Testes do componente Table', () => {
     userEvent.type(value, valueValue);
     userEvent.type(currency, currencyValue);
 
-    userEvent.click(button);
+    // userEvent.click(button);
 
     await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
     const editButton = screen.getByTestId('edit-btn');
@@ -62,14 +62,14 @@ describe('Testes do componente Table', () => {
 
   it('Delete um item da tabela', async () => {
     renderWithRouterAndRedux(<Wallet />);
-    await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
-    const description = screen.getByTestId('description-input');
-    const tag = screen.getByTestId('tag-input');
-    const method = screen.getByTestId('method-input');
-    const value = screen.getByTestId('value-input');
-    const currency = screen.getByTestId('currency-input');
+    // await waitForElementToBeRemoved(() => screen.getByTestId('fetching'));
+    const description = screen.getByTestId('description');
+    const tag = screen.getByTestId('tag');
+    const method = screen.getByTestId('method');
+    const value = screen.getByTestId('value');
+    const currency = screen.getByTestId('currency');
 
-    const button = screen.getByTestId('button-add');
+    // const button = screen.getByTestId('button');
     const descriptionValue = 'Teste';
     const tagValue = 'Alimentação';
     const methodValue = 'Dinheiro';
@@ -82,7 +82,7 @@ describe('Testes do componente Table', () => {
     userEvent.type(value, valueValue);
     userEvent.type(currency, currencyValue);
 
-    userEvent.click(button);
+    // userEvent.click(button);
 
     await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
     const deleteButton = screen.getByTestId('delete-btn');
