@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { saveExpensesForm } from '../redux/actions';
+
+const METHODS = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
+const CATEGORIES = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
 class WalletForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      valueInput: 0,
-      descriptionInput: '',
-      methodInput: 'Dinheiro',
-      tagInput: 'Alimentação',
+      value: '',
+      description: '',
       currency: 'USD',
-
+      method: '',
+      tag: '',
     };
   }
 
@@ -22,88 +25,91 @@ class WalletForm extends Component {
     </option>
   ));
 
-  inputChange = ({ target }) => {
+  handleSubmit = (event) => {
+    const { value, description, currency, method, tag } = this.state;
+    const { dispatch, idToEdit } = this.props;
+    event.preventDefault();
+    const expensesInfos = {
+      id: idToEdit,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+    dispatch(saveExpensesForm(expensesInfos));
     this.setState({
-      [target.name]: target.value,
+      value: '',
+      description: '',
+      method: '',
+      tag: '',
     });
   };
 
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
+    const { value, description, currency, method, tag } = this.state;
     const { currencies } = this.props;
-    const {
-      valueInput,
-      descriptionInput,
-      methodInput,
-      tagInput,
-      currency,
-    } = this.state;
     return (
-      <div>
-        <form />
-        Valor:
+      <form onSubmit={ this.handleSubmit }>
         <input
-          id="value-input"
-          name="valueInput"
-          data-testid="value-input"
+          name="value"
           type="number"
-          onChange={ this.inputChange }
-          value={ valueInput }
+          value={ value }
+          onChange={ this.handleChange }
+          data-testid="value-input"
         />
-
-        Descrição:
         <input
-          id="description-input"
-          name="descriptionInput"
-          data-testid="description-input"
+          name="description"
           type="text"
-          onChange={ this.inputChange }
-          value={ descriptionInput }
+          value={ description }
+          onChange={ this.handleChange }
+          data-testid="description-input"
         />
-
         <select
           name="currency"
           value={ currency }
-          onChange={ this.inputChange }
+          onChange={ this.handleChange }
           data-testid="currency-input"
         >
           {this.toOptions(currencies)}
         </select>
         <select
-          onChange={ this.inputChange }
-          value={ methodInput }
-          name="methodInput"
-          id="method-input"
+          name="method"
+          value={ method }
+          onChange={ this.handleChange }
           data-testid="method-input"
         >
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
+          {this.toOptions(METHODS)}
         </select>
-
         <select
-          onChange={ this.inputChange }
-          value={ tagInput }
-          name="tagInput"
-          id="tag-input"
+          name="tag"
+          value={ tag }
+          onChange={ this.handleChange }
           data-testid="tag-input"
         >
-          <option value="Alimentação">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saúde">Saúde</option>
+          {this.toOptions(CATEGORIES)}
         </select>
-      </div>
-
+        <button type="submit">Adicionar despesa</button>
+      </form>
     );
   }
 }
+
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (globalState) => ({
   currencies: globalState.wallet.currencies,
+  expenses: globalState.wallet.expenses,
+  idToEdit: globalState.wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(WalletForm);
