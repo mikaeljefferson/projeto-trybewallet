@@ -35,7 +35,7 @@ describe('Testes do componente Table', () => {
 
     // userEvent.click(button);
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
+    // await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
     const editButton = screen.getByTestId('edit-btn');
     userEvent.click(editButton);
 
@@ -84,7 +84,7 @@ describe('Testes do componente Table', () => {
 
     // userEvent.click(button);
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
+    // await waitForElementToBeRemoved(() => screen.getByTestId('my-msg'));
     const deleteButton = screen.getByTestId('delete-btn');
     userEvent.click(deleteButton);
   });

@@ -5,6 +5,7 @@ export const addPersonalInfo = (value) => ({
   payload: value,
 });
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const objKeys = (obj) => Object.keys(obj);
 export const searchCurrencies = (currencies) => ({
@@ -31,7 +32,7 @@ export const saveExpensesForm = (expenseInfos) => async (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const deleteAndUpdateExpense = (payload) => ({
-  type: 'DELETE_AND_UPDATE_EXPENSE',
-  payload,
+export const deleteExpense = (id, expenses) => ({
+  type: DELETE_EXPENSE,
+  payload: expenses.filter((expense) => expense.id !== id),
 });
