@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteExpense } from '../redux/actions';
+import styles from './table.module.css';
 
 class Table extends Component {
   handleDelete = (id) => {
@@ -18,20 +19,8 @@ class Table extends Component {
     const { tableInfos } = this.props;
     return (
       <table>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
+        <thead />
+        <tbody className={ styles.body__table }>
           {tableInfos.map((curr) => (
             <tr key={ curr.id }>
               <td>{curr.description}</td>

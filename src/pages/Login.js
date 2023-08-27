@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import styles from './Login.module.css';
 import { addPersonalInfo } from '../redux/actions';
 
 class Login extends React.Component {
@@ -32,32 +33,42 @@ class Login extends React.Component {
     const { dispatch, email } = this.props;
 
     return (
-      <div>
-        <input
-          onChange={ ({ target: { value } }) => dispatch(addPersonalInfo(value)) }
-          type="text"
-          name="email"
-          value={ email }
-          data-testid="email-input"
-        />
+      <main className={ styles.main }>
+        <div className={ styles.Card }>
+          <div className={ styles.container_title }>
+            <h1>TrybeWallet</h1>
+          </div>
+          <div className={ styles.cardForm }>
+            <input
+              onChange={ ({ target: { value } }) => dispatch(addPersonalInfo(value)) }
+              type="text"
+              name="email"
+              value={ email }
+              data-testid="email-input"
+              placeholder="digite seu email"
+            />
 
-        <input
-          onChange={ this.handleChange }
-          type="password"
-          name="password"
-          value={ password }
-          data-testid="password-input"
-        />
-        <Link to="/carteira">
-          <button
-            type="button"
-            disabled={ isButtonDisabled }
-          >
-            Entrar
+            <input
+              onChange={ this.handleChange }
+              type="password"
+              name="password"
+              value={ password }
+              data-testid="password-input"
+              placeholder="digite sua senha"
+            />
+            <Link to="/carteira">
+              <button
+                type="button"
+                disabled={ isButtonDisabled }
+              >
+                Entrar
 
-          </button>
-        </Link>
-      </div>
+              </button>
+            </Link>
+          </div>
+        </div>
+
+      </main>
     );
   }
 }
